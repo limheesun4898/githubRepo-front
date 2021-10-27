@@ -1,20 +1,34 @@
 import React from 'react';
+import styled from 'styled-components';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import RepoBookmark from './container/bookmark/RepoBookmark';
-import './App.css';
+import Main from './containers/Main';
 
 function App() {
   return (
     <BrowserRouter>
-      <div className="App">
+      <RootContainer>
         {/* <Header /> */}
         <Switch>
-          <Route exact path="/" component={RepoBookmark} />
-          {/* <Route path="/register" component={RepoRegister} /> */}
+          <MainContainer>
+            <Route exact path="/" component={Main} />
+            {/* <Route path="/register" component={} /> */}
+          </MainContainer>
         </Switch>
-      </div>
+      </RootContainer>
     </BrowserRouter>
   );
 }
 
 export default App;
+
+const RootContainer = styled.div`
+  width: 100%;
+`;
+
+const MainContainer = styled.div`
+  width: 1200px;
+  height: 100%;
+  display: block;
+  margin: 0 auto;
+  border: 1px solid;
+`;
