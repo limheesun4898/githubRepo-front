@@ -14,5 +14,12 @@ module.exports = {
     'react/react-in-jsx-scope': 0,
     'react/require-default-props': 0,
     'no-alert': 0,
+    'no-unused-vars': 0,
+    'no-unde': 0,
+    'no-undef': 0,
+    'no-console': 0,
+    'no-plusplus': 0,
+    'no-const-assign': 0,
+    'max-len': 0,
   },
 };

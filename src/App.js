@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+// import 'bootstrap/dist/css/bootstrap.min.css';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Main from './containers/Main';
 
@@ -30,5 +31,4 @@ const MainContainer = styled.div`
   height: 100%;
   display: block;
   margin: 0 auto;
-  border: 1px solid;
 `;
