@@ -32,7 +32,7 @@ export function repoSearchRequest(repo) {
   return (dispatch) => {
     dispatch(repoSearch());
     const config = {
-      headers: { Authorization: 'token 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' },
+      headers: { Authorization: `token ${process.env.REACT_APP_GIT_ACCESS_TOKEN}` },
     };
     return axios.get(`${process.env.REACT_APP_HOST}/search/repositories?q=${repo}`, config)
       .then((response) => {
@@ -78,7 +78,7 @@ export function issueListRequest(repoName, page) {
   return (dispatch) => {
     dispatch(issueList());
     const config = {
-      headers: { Authorization: 'token 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' },
+      headers: { Authorization: `token ${process.env.REACT_APP_GIT_ACCESS_TOKEN}` },
     };
     return axios.get(`${process.env.REACT_APP_HOST}/search/issues?q=repo:${repoName}&page=${page}&per_page=10`, config)
       .then((response) => {

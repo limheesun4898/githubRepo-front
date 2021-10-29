@@ -35,7 +35,7 @@ const IssueCollect = (props) => {
       // tab 선택했을 때 해당 bookmark 삭제했을 때
       setTab(bookmarks[0]);
       setCurrentPage(1);
-      // dispatch(issueListRequest(bookmarks[0], 1));
+      dispatch(issueListRequest(bookmarks[0], 1));
     }
   }, [bookmarks]);
 
