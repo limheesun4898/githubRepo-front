@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
@@ -6,8 +5,7 @@ import { repoSearchRequest } from '../../reducer/gitApiAction';
 import RepoDataList from '../../components/search/RepoDataList';
 
 const RepoSearch = (props) => {
-  const dispatch = useDispatch();
-  const { bookmarks, setBookmarks } = props;
+  const { bookmarks, setBookmarks, isMobile } = props;
 
   const repoList = useSelector((state) => state.search.repoSearch.data);
 
@@ -16,6 +14,8 @@ const RepoSearch = (props) => {
   const handleChange = (e) => {
     setRepoInput(e.target.value);
   };
+
+  const dispatch = useDispatch();
 
   const handleRepoSearch = () => {
     dispatch(repoSearchRequest(repoInput));
@@ -35,7 +35,7 @@ const RepoSearch = (props) => {
   };
 
   return (
-    <RepoSearchBox>
+    <RepoSearchBox isMobile={isMobile}>
       <h3>repository 검색</h3>
       <RepoInput
         name="repoInput"
@@ -56,11 +56,11 @@ const RepoSearch = (props) => {
 export default RepoSearch;
 
 const RepoSearchBox = styled.div`
-  width: 70%;
+  width: ${(props) => (props.isMobile ? '' : '50%')};
+  margin-right: ${(props) => (props.isMobile ? '0' : '2%')};
   border-radius: 16px;
   background: white;
   padding: 0 18px 18px 18px;
-  margin-right: 2%;
 `;
 
 const RepoInput = styled.input`

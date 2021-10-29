@@ -1,5 +1,3 @@
-/* eslint-disable max-len */
-/* eslint-disable react/no-array-index-key */
 import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
@@ -13,8 +11,8 @@ function PaginationComponent({
         <Arrow>&#8249;</Arrow>
       </ArrowBtn>
       {
-        pageArray.map((res, index) => (
-          <PageNumberBtn currentActive={currentPage === res} key={index} onClick={handleChangePage} type="button" name={res}>
+        pageArray.map((res) => (
+          <PageNumberBtn currentActive={currentPage === res} onClick={handleChangePage} type="button" name={res}>
             {res}
           </PageNumberBtn>
         ))

@@ -1,5 +1,7 @@
-// import axios from '../util/AxiosWrapper';
 import axios from 'axios';
+
+axios.defaults.baseURL = process.env.REACT_APP_GIT_HOST;
+axios.defaults.headers.common.Authorization = `token ${process.env.REACT_APP_GIT_ACCESS_TOKEN}`;
 
 export const REPO_SEARCH = 'REPO_SEARCH';
 export const REPO_SEARCH_SUCCESS = 'REPO_SEARCH_SUCCESS';
@@ -31,10 +33,7 @@ export function repoSearchFailure() {
 export function repoSearchRequest(repo) {
   return (dispatch) => {
     dispatch(repoSearch());
-    const config = {
-      headers: { Authorization: `token ${process.env.REACT_APP_GIT_ACCESS_TOKEN}` },
-    };
-    return axios.get(`${process.env.REACT_APP_HOST}/search/repositories?q=${repo}`, config)
+    return axios.get(`/search/repositories?q=${repo}`)
       .then((response) => {
         dispatch(repoSearchSuccess(response.data));
       }).catch((error) => {
@@ -42,18 +41,6 @@ export function repoSearchRequest(repo) {
       });
   };
 }
-
-// export function repoSearchRequest(repo) {
-//   return (dispatch) => {
-//     dispatch(repoSearch());
-//     return axios.get(`/search/repositories?q=${repo}`)
-//       .then((response) => {
-//         dispatch(repoSearchSuccess(response.data));
-//       }).catch((error) => {
-//         dispatch(repoSearchFailure());
-//       });
-//   };
-// }
 
 export function issueList() {
   return {
@@ -77,10 +64,7 @@ export function issueListFailure() {
 export function issueListRequest(repoName, page) {
   return (dispatch) => {
     dispatch(issueList());
-    const config = {
-      headers: { Authorization: `token ${process.env.REACT_APP_GIT_ACCESS_TOKEN}` },
-    };
-    return axios.get(`${process.env.REACT_APP_HOST}/search/issues?q=repo:${repoName}&page=${page}&per_page=10`, config)
+    return axios.get(`/search/issues?q=repo:${repoName}&page=${page}&per_page=10`)
       .then((response) => {
         dispatch(issueListSuccess(response.data));
       }).catch((error) => {

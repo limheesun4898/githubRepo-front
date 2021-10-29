@@ -1,4 +1,3 @@
-/* eslint-disable react/button-has-type */
 import React from 'react';
 import styled from 'styled-components';
 import useLocalStorage from '../hooks/useLocalStorage';
@@ -9,15 +8,13 @@ import IssueCollect from './issue/IssueCollect';
 
 const Main = () => {
   const [bookmarks, setBookmarks] = useLocalStorage('bookmarks', '');
-  const {
-    width, height, isMobile, isLoaded,
-  } = useViewport();
+  const { width, height, isMobile, isLoaded } = useViewport();
 
   return (
     <MainContainer width={width}>
       <Container type="top" isMobile={isMobile}>
-        <RepoSearch bookmarks={bookmarks} setBookmarks={setBookmarks} />
-        <RepoBookmark bookmarks={bookmarks} setBookmarks={setBookmarks} />
+        <RepoSearch bookmarks={bookmarks} setBookmarks={setBookmarks} isMobile={isMobile} />
+        <RepoBookmark bookmarks={bookmarks} setBookmarks={setBookmarks} isMobile={isMobile} />
       </Container>
       <Container type="issue" isMobile={isMobile}>
         <IssueCollect bookmarks={bookmarks} />
@@ -39,6 +36,6 @@ const Container = styled.div`
   background: #F4F4F7;
   border-radius: 16px;
   padding: ${(props) => (props.isMobile ? '12px' : '36px')};
-  display: ${(props) => (props.type === 'top' ? 'flex' : 'block')};
-  margin: ${(props) => (props.type === 'top' ? '28px 0' : '')};
+  display: ${(props) => (props.type === 'issue' || props.type === 'top' && props.isMobile ? 'block' : 'flex')};
+  margin: ${(props) => (props.type === 'issue' ? '' : '28px 0')};
 `;

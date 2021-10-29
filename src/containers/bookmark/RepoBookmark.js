@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 
 const RepoBookmark = (props) => {
-  const { bookmarks, setBookmarks } = props;
+  const { bookmarks, setBookmarks, isMobile } = props;
 
   const handleBookmarkRemove = (name) => {
     const removeData = bookmarks.filter((e) => e !== name);
@@ -11,7 +11,7 @@ const RepoBookmark = (props) => {
   };
 
   return (
-    <RepoBookmarkBox>
+    <RepoBookmarkBox isMobile={isMobile}>
       <h3>북마크</h3>
       {bookmarks
         && bookmarks.length === 0 && (
@@ -33,7 +33,7 @@ const RepoBookmark = (props) => {
 export default RepoBookmark;
 
 const RepoBookmarkBox = styled.div`
-  width: 30%;
+  width: ${(props) => (props.isMobile ? '' : '50%')};
   border-radius: 16px;
   background: white;
   padding: 0 18px 18px 18px;

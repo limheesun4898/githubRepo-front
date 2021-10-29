@@ -21,5 +21,7 @@ module.exports = {
     'no-plusplus': 0,
     'no-const-assign': 0,
     'max-len': 0,
+    'object-curly-newline': 0,
+    'no-mixed-operators': 0,
   },
 };

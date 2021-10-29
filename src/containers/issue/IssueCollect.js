@@ -1,5 +1,3 @@
-/* eslint-disable jsx-a11y/click-events-have-key-events */
-/* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
@@ -17,22 +15,15 @@ const IssueCollect = (props) => {
       </div>
     );
   }
+  const dispatch = useDispatch();
 
   const [tab, setTab] = useState();
   const [currentPage, setCurrentPage] = useState(1);
-  const dispatch = useDispatch();
   const issueList = useSelector((state) => state.search.issueList.data);
 
   const issueRequest = (repoName, page) => {
     dispatch(issueListRequest(repoName, page));
   };
-
-  useEffect(() => {
-    if (bookmarks && bookmarks.length > 0) {
-      setTab(bookmarks[0]);
-      issueRequest(bookmarks[0], currentPage);
-    }
-  }, []);
 
   useEffect(() => {
     if (bookmarks.indexOf(tab) === -1) {
