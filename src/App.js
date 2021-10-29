@@ -10,10 +10,8 @@ function App() {
       <RootContainer>
         {/* <Header /> */}
         <Switch>
-          <MainContainer>
-            <Route exact path="/" component={Main} />
-            {/* <Route path="/register" component={} /> */}
-          </MainContainer>
+          <Route exact path="/" component={Main} />
+          {/* <Route path="/register" component={} /> */}
         </Switch>
       </RootContainer>
     </BrowserRouter>
@@ -24,11 +22,4 @@ export default App;
 
 const RootContainer = styled.div`
   width: 100%;
-`;
-
-const MainContainer = styled.div`
-  width: 1200px;
-  height: 100%;
-  display: block;
-  margin: 0 auto;
 `;

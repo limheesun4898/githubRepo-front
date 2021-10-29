@@ -24,7 +24,7 @@ const RepoSearch = (props) => {
   const handleBookmarkAdd = (index) => {
     if (bookmarks.length > 3) {
       // 4개 이상 등록 체크
-      alert('4개 이상 안됌');
+      alert('4개 이상 등록이 안됩니다.');
     } else if (bookmarks.length > 0 && bookmarks.indexOf(repoList.items[index].full_name) !== -1) {
       // 중복 체크
       alert('이미 북마크에 있습니다.');
@@ -37,7 +37,7 @@ const RepoSearch = (props) => {
   return (
     <RepoSearchBox>
       <h3>repository 검색</h3>
-      <input
+      <RepoInput
         name="repoInput"
         placeholder="repository 이름을 입력하세요."
         value={repoInput}
@@ -58,6 +58,15 @@ export default RepoSearch;
 const RepoSearchBox = styled.div`
   width: 70%;
   border-radius: 16px;
-  background: #FFFF;
+  background: white;
+  padding: 0 18px 18px 18px;
+  margin-right: 2%;
+`;
 
+const RepoInput = styled.input`
+  width: 280px;
+  height: 28px;
+  font-size: 18px;
+  border-radius: 8px;
+  border: 1px solid #BBBBBB;
 `;

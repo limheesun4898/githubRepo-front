@@ -46,7 +46,7 @@ const PageNumberBtn = styled.button`
   width: ${(props) => (props.currentActive ? '30px' : '')};
   height: ${(props) => (props.currentActive ? '30px' : '')};
   color: ${(props) => (props.currentActive ? 'white' : 'black')};
-  background: ${(props) => (props.currentActive ? '#00a8ad' : 'white')};
+  background: ${(props) => (props.currentActive ? '#00a8ad' : 'none')};
   border-radius: ${(props) => (props.currentActive ? '50%' : '')};
 `;
 

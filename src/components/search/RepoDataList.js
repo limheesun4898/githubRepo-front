@@ -8,7 +8,7 @@ const RepoDataList = (props) => {
   if (repoList && !repoList.items) {
     return (
       <div>
-        데이터가 없음
+        Repository 검색 결과가 없습니다.
       </div>
     );
   }
@@ -22,8 +22,12 @@ const RepoDataList = (props) => {
       {repoList.total_count > 0
         && repoList.items.map((res, index) => (
           <Repolayout>
-            <p>{res.full_name}</p>
-            <button type="button" onClick={() => handleAddClick(index)}>등록</button>
+            <div>
+              {res.full_name.split('/')[0]}
+              <span>님의 </span>
+              {res.name}
+            </div>
+            <button type="button" onClick={() => handleAddClick(index)}>북마크 등록</button>
           </Repolayout>
         ))}
     </RepoResultBox>
@@ -42,10 +46,19 @@ RepoDataList.defaultProps = {
 export default RepoDataList;
 
 const RepoResultBox = styled.div`
-height: 300px;
-overflow-y: auto;
+  height: 200px;
+  overflow-y: auto;
 `;
 const Repolayout = styled.div`
-height: 80px;
-padding: 12px
+  display: flex;
+  height: 36px;
+  margin: 12px;
+  padding: 0 16px;
+  border-bottom: 1px solid #E6E6E6;
+
+  div {
+    width: 85%;
+    font-sie: 16px;
+    vertical-align: middle;
+  }
 `;

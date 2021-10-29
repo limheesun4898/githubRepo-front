@@ -5,10 +5,10 @@ import styled from 'styled-components';
 const IssueDataList = (props) => {
   const { issueList } = props;
 
-  if (issueList && !issueList.items) {
+  if (issueList && issueList.total_count === 0) {
     return (
       <div>
-        데이터가 없음
+        이슈가 없습니다.
       </div>
     );
   }
@@ -18,24 +18,20 @@ const IssueDataList = (props) => {
   };
 
   return (
-    <RepoResultBox>
-      {issueList.total_count === 0
-      && (
-        <div>없음.</div>
-      )}
+    <IssueResultBox>
       {issueList.total_count > 0
-        && issueList.items.map((res, index) => (
-          <Repolayout>
-            <span>{res.title}</span>
-            <button
-              type="button"
-              onClick={() => handleIssueOpen(res.number)}
-            >
-              이슈보로가기
-            </button>
-          </Repolayout>
+        && issueList.items.map((res) => (
+          <Issue
+            type="button"
+            onClick={() => handleIssueOpen(res.number)}
+          >
+            <span>
+              제목:
+              {res.title}
+            </span>
+          </Issue>
         ))}
-    </RepoResultBox>
+    </IssueResultBox>
   );
 };
 
@@ -50,10 +46,15 @@ IssueDataList.defaultProps = {
 
 export default IssueDataList;
 
-const RepoResultBox = styled.div`
+const IssueResultBox = styled.div`
+  margin: 28px 0;
 `;
-const Repolayout = styled.div`
-height: 32px;
-padding: 12px;
-border: 1px solid;
+const Issue = styled.div`
+  height: 32px;
+  padding: 12px;
+  border-bottom: 1px solid #E6E6E6;
+
+  &:hover {
+    background-color: rgb(246, 246, 246);
+  }
 `;

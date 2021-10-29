@@ -1,40 +1,44 @@
 /* eslint-disable react/button-has-type */
-import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React from 'react';
 import styled from 'styled-components';
 import useLocalStorage from '../hooks/useLocalStorage';
+import useViewport from '../hooks/useViewport';
 import RepoSearch from './search/RepoSearch';
 import RepoBookmark from './bookmark/RepoBookmark';
 import IssueCollect from './issue/IssueCollect';
 
 const Main = () => {
   const [bookmarks, setBookmarks] = useLocalStorage('bookmarks', '');
+  const {
+    width, height, isMobile, isLoaded,
+  } = useViewport();
 
   return (
-    <>
-      <TopContainer>
+    <MainContainer width={width}>
+      <Container type="top" isMobile={isMobile}>
         <RepoSearch bookmarks={bookmarks} setBookmarks={setBookmarks} />
         <RepoBookmark bookmarks={bookmarks} setBookmarks={setBookmarks} />
-      </TopContainer>
-      <IssueContainer>
+      </Container>
+      <Container type="issue" isMobile={isMobile}>
         <IssueCollect bookmarks={bookmarks} />
-      </IssueContainer>
-    </>
+      </Container>
+    </MainContainer>
   );
 };
 
 export default Main;
 
-const TopContainer = styled.div`
-  display: flex;
-  margin: 48px 0;
-  background: #F4F4F7;
-  border-radius: 16px;
-  padding: 48px 52px;
+const MainContainer = styled.div`
+  width: ${(props) => (props.width < 1200 ? '100%' : '1200px')};
+  height: 100%;
+  display: block;
+  margin: 0 auto;
 `;
 
-const IssueContainer = styled.div`
-  display: block;
-  width: 100%;
-  border: 1px solid;
+const Container = styled.div`
+  background: #F4F4F7;
+  border-radius: 16px;
+  padding: ${(props) => (props.isMobile ? '12px' : '36px')};
+  display: ${(props) => (props.type === 'top' ? 'flex' : 'block')};
+  margin: ${(props) => (props.type === 'top' ? '28px 0' : '')};
 `;

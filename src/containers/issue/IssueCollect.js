@@ -13,7 +13,7 @@ const IssueCollect = (props) => {
   if (bookmarks && bookmarks.length === 0) {
     return (
       <div>
-        데이터 없음
+        저장된 Repository가 없습니다.
       </div>
     );
   }
@@ -23,10 +23,14 @@ const IssueCollect = (props) => {
   const dispatch = useDispatch();
   const issueList = useSelector((state) => state.search.issueList.data);
 
+  const issueRequest = (repoName, page) => {
+    dispatch(issueListRequest(repoName, page));
+  };
+
   useEffect(() => {
     if (bookmarks && bookmarks.length > 0) {
       setTab(bookmarks[0]);
-      dispatch(issueListRequest(bookmarks[0], currentPage));
+      issueRequest(bookmarks[0], currentPage);
     }
   }, []);
 
@@ -35,7 +39,7 @@ const IssueCollect = (props) => {
       // tab 선택했을 때 해당 bookmark 삭제했을 때
       setTab(bookmarks[0]);
       setCurrentPage(1);
-      dispatch(issueListRequest(bookmarks[0], 1));
+      issueRequest(bookmarks[0], 1);
     }
   }, [bookmarks]);
 
@@ -43,13 +47,13 @@ const IssueCollect = (props) => {
     setTab(res);
     setCurrentPage(1);
 
-    dispatch(issueListRequest(res, 1));
+    issueRequest(res, 1);
   };
 
   const handleChangePage = (page) => {
     setCurrentPage(Number(page));
 
-    dispatch(issueListRequest(tab, Number(page)));
+    issueRequest(tab, Number(page));
   };
 
   const handleIssueOpen = (issueNumber) => {
@@ -57,7 +61,7 @@ const IssueCollect = (props) => {
   };
 
   return (
-    <div>
+    <IssueContainer>
       <BookmarkTabBox>
         {bookmarks
           && bookmarks.map((res) => (
@@ -66,20 +70,18 @@ const IssueCollect = (props) => {
             </Tab>
           ))}
       </BookmarkTabBox>
-      {issueList ? (
-        <IssueDataList
-          issueList={issueList}
-          handleIssueOpen={handleIssueOpen}
-        />
-      ) : <div>dsafsa</div>}
-      {issueList ? (
+      <IssueDataList
+        issueList={issueList}
+        handleIssueOpen={handleIssueOpen}
+      />
+      {issueList && (
         <PaginationContainer
           handleChangePage={handleChangePage}
           currentPage={currentPage}
           totalCount={Math.round(issueList.total_count / 10) === 0 ? 1 : Math.round(issueList.total_count / 10)}
         />
-      ) : null }
-    </div>
+      )}
+    </IssueContainer>
   );
 };
 
@@ -87,14 +89,20 @@ export default IssueCollect;
 
 const BookmarkTabBox = styled.div`
   display: flex;
-  place-content: space-around;
-  width: 760px;
+  justify-content: center;
   margin: 0 auto;
 `;
 
 const Tab = styled.div`
+  cursor: pointer;
   padding: 16px;
-  border: 1px solid;
+  border-radius: 8px;  
   background: ${(props) => (props.active ? 'green' : 'white')};
   color: ${(props) => (props.active ? 'white' : 'black')};
+`;
+
+const IssueContainer = styled.div`
+  background: white;
+  padding: 16px;
+  border-radius: 16px;
 `;
