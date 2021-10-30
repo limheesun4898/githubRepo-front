@@ -12,6 +12,13 @@ email: heehee4898@gmail.com
 
 * * *
 
+### 다이얼그램
+
+![image](https://user-images.githubusercontent.com/38110785/139554152-3d7cd53f-970b-4778-b3b2-c72d26b7e711.png)
+
+
+* * *
+
 ### 작업 방식
 1. UI구조 정하기
 ![image](https://user-images.githubusercontent.com/38110785/139542159-878671b2-5976-432c-9cc4-11b95204fbb2.png)
