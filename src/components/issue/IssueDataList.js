@@ -8,9 +8,9 @@ const IssueDataList = (props) => {
 
   if (issueList && issueList.total_count === 0) {
     return (
-      <div>
+      <DataNone>
         이슈가 없습니다.
-      </div>
+      </DataNone>
     );
   }
 
@@ -27,10 +27,18 @@ const IssueDataList = (props) => {
             type="button"
             onClick={() => handleIssueOpen(res.number)}
           >
-            <span>
-              title:&nbsp;
+            <Title>
               {res.title}
-            </span>
+            </Title>
+            <div>
+              #
+              {res.number}
+              &nbsp;
+              {res.state}
+              &nbsp;
+              by&nbsp;
+              {res.user.login}
+            </div>
           </Issue>
         ))}
     </IssueResultBox>
@@ -54,7 +62,6 @@ const IssueResultBox = styled.div`
 `;
 
 const Issue = styled.div`
-  height: 32px;
   padding: 12px;
   border-bottom: 1px solid ${Color.grayBorder};
   cursor: pointer;
@@ -62,4 +69,14 @@ const Issue = styled.div`
   &:hover {
     background-color: rgb(246, 246, 246);
   }
+`;
+
+const DataNone = styled.div`
+  margin: 24px 0;
+  padding: 0 8px;
+`;
+
+const Title = styled.div`
+  font-weight: bold;
+  margin-bottom: 4px;
 `;

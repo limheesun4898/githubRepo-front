@@ -85,16 +85,18 @@ export default IssueCollect;
 
 const BookmarkTabBox = styled.div`
   display: ${(props) => (props.isMobile ? 'block' : 'flex')};
-  justify-content: center;
-  margin: 0 auto;
+  // justify-content: center;
+  // margin: 0 auto;
 `;
 
 const Tab = styled.div`
   cursor: pointer;
-  padding: 16px;
-  border-radius: 8px;  
-  background: ${(props) => (props.active ? 'green' : 'white')};
-  color: ${(props) => (props.active ? 'white' : 'black')};
+  padding: 16px 0 5px 0;
+  margin: 0 8px;  
+  background: white;
+  border-bottom: ${(props) => (props.active ? '2px solid green' : '')};
+  color: black;
+  opacity: ${(props) => (props.active ? '': '0.5')};
 `;
 
 const IssueContainer = styled.div`

@@ -51,18 +51,28 @@ const DataLayout = styled.div`
   display: flex;
   padding: 8px 16px;
   border-bottom: 1px solid ${Color.grayBorder};
+  position: relative;
 
   div {
-    flex: 9;
+    width: calc(100% - 65px);
+    padding: 8px 0;
     font-sie: 16px;
     vertical-align: middle;
   }
+
   button {
-    flex: 1;
+    width: 65px;
+    height: 36px;
     background: white;
     border: 1px solid ${Color.grayBorder};
     border-radius: 8px;
     padding: 8px;
     cursor: pointer;
+    position: absolute;
+    right: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+
   }
 `;
