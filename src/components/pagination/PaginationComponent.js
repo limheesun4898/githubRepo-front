@@ -13,7 +13,7 @@ function PaginationComponent({
       </ArrowBtn>
       {
         pageArray.map((res) => (
-          <PageNumberBtn currentActive={currentPage === res} onClick={handleChangePage} type="button" name={res}>
+          <PageNumberBtn key={res} currentActive={currentPage === res} onClick={handleChangePage} type="button" name={res}>
             {res}
           </PageNumberBtn>
         ))

@@ -1,33 +1,33 @@
 import React from 'react';
 import styled from 'styled-components';
-import BookmarkList from '../../components/common/BookmarkList';
+import RepoDataList from '../../components/repository/RepoDataList';
 
-const RepoBookmark = (props) => {
+const Bookmark = (props) => {
   const { bookmarks, setBookmarks, isMobile } = props;
 
-  const handleBookmarkRemove = (index) => {
-    const removeData = bookmarks.filter((e, idx) => idx !== index);
+  const handleBookmarkRemove = (res) => {
+    const removeData = bookmarks.filter((e) => e.id !== res.id);
 
     setBookmarks(removeData);
   };
 
   return (
-    <RepoBookmarkBox isMobile={isMobile}>
+    <BookmarkBox isMobile={isMobile}>
       <h3>북마크</h3>
-      <BookmarkList
+      <RepoDataList
         dataList={bookmarks}
         handleClick={handleBookmarkRemove}
         btnName="삭제"
       />
-    </RepoBookmarkBox>
+    </BookmarkBox>
   );
 };
 
-export default RepoBookmark;
+export default Bookmark;
 
-const RepoBookmarkBox = styled.div`
+const BookmarkBox = styled.div`
   width: ${(props) => (props.isMobile ? '' : '50%')};
   border-radius: 16px;
   background: white;
-  padding: 0 18px 18px 18px;
+  padding: 12px;
 `;

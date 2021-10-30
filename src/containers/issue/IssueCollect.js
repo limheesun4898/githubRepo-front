@@ -21,13 +21,13 @@ const IssueCollect = (props) => {
   const [currentPage, setCurrentPage] = useState(1);
   const issueList = useSelector((state) => state.search.issueList.data);
 
-  const issueRequest = (repoName, page) => {
-    dispatch(issueListRequest(repoName, page));
+  const issueRequest = (bookmark, page) => {
+    dispatch(issueListRequest(bookmark.full_name, page));
   };
 
   useEffect(() => {
     if (bookmarks.indexOf(tab) === -1) {
-      // tab 선택했을 때 해당 bookmark 삭제했을 때
+      // 선택된 tab과 bookmarks 삭제가 같을 경우
       setTab(bookmarks[0]);
       setCurrentPage(1);
       issueRequest(bookmarks[0], 1);
@@ -48,7 +48,7 @@ const IssueCollect = (props) => {
   };
 
   const handleIssueOpen = (issueNumber) => {
-    window.open(`${process.env.REACT_APP_GITHUB}${tab}/issues/${issueNumber}`);
+    window.open(`${process.env.REACT_APP_GITHUB}${tab.full_name}/issues/${issueNumber}`);
   };
 
   return (
@@ -57,8 +57,12 @@ const IssueCollect = (props) => {
       <BookmarkTabBox isMobile={isMobile}>
         {bookmarks
           && bookmarks.map((res) => (
-            <Tab active={tab === res} onClick={() => handleTabClick(res)}>
-              {res}
+            <Tab
+              key={res.id}
+              active={tab === res}
+              onClick={() => handleTabClick(res)}
+            >
+              {res.name}
             </Tab>
           ))}
       </BookmarkTabBox>

@@ -23,6 +23,7 @@ const IssueDataList = (props) => {
       {issueList.total_count > 0
         && issueList.items.map((res) => (
           <Issue
+            key={res.id}
             type="button"
             onClick={() => handleIssueOpen(res.number)}
           >

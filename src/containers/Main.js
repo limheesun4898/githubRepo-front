@@ -4,7 +4,7 @@ import Color from '../style/ColorTheme';
 import useLocalStorage from '../hooks/useLocalStorage';
 import useViewport from '../hooks/useViewport';
 import RepoSearch from './search/RepoSearch';
-import RepoBookmark from './bookmark/RepoBookmark';
+import Bookmark from './bookmark/Bookmark';
 import IssueCollect from './issue/IssueCollect';
 
 const Main = () => {
@@ -15,7 +15,7 @@ const Main = () => {
     <MainContainer width={width}>
       <Container type="top" isMobile={isMobile}>
         <RepoSearch bookmarks={bookmarks} setBookmarks={setBookmarks} isMobile={isMobile} />
-        <RepoBookmark bookmarks={bookmarks} setBookmarks={setBookmarks} isMobile={isMobile} />
+        <Bookmark bookmarks={bookmarks} setBookmarks={setBookmarks} isMobile={isMobile} />
       </Container>
       <Container type="issue" isMobile={isMobile}>
         <IssueCollect bookmarks={bookmarks} isMobile={isMobile} />

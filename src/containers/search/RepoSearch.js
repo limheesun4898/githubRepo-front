@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import Color from '../../style/ColorTheme';
 import { repoSearchRequest } from '../../reducer/gitApiAction';
-import BookmarkList from '../../components/common/BookmarkList';
+import RepoDataList from '../../components/repository/RepoDataList';
 
 const RepoSearch = (props) => {
   const { bookmarks, setBookmarks, isMobile } = props;
@@ -22,16 +22,27 @@ const RepoSearch = (props) => {
     setRepoInput('');
   };
 
-  const handleBookmarkAdd = (index) => {
+  const handleBookmarkAdd = (res) => {
     if (bookmarks.length > 3) {
       // 4개 이상 등록 체크
       alert('4개 이상 등록이 안됩니다.');
-    } else if (bookmarks.length > 0 && bookmarks.indexOf(repoList.items[index].full_name) !== -1) {
-      // 중복 체크
+
+      return;
+    }
+
+    const addData = {
+      id: res.id,
+      name: res.name,
+      full_name: res.full_name,
+    };
+
+    // 중복 체크
+    const duplicateCheck = bookmarks.find((item) => item.id === addData.id);
+    if (duplicateCheck) {
       alert('이미 북마크에 있습니다.');
     } else {
-      const addData = [...bookmarks, repoList.items[index].full_name];
-      setBookmarks(addData);
+      const list = [...bookmarks, addData];
+      setBookmarks(list);
     }
   };
 
@@ -52,7 +63,7 @@ const RepoSearch = (props) => {
         onKeyPress={handleKeyPress}
       />
       {/* <button type="button" onClick={handleRepoSearch}>검색</button> */}
-      <BookmarkList
+      <RepoDataList
         dataList={repoList.items}
         handleClick={handleBookmarkAdd}
         btnName="등록"
@@ -65,10 +76,10 @@ export default RepoSearch;
 
 const RepoSearchBox = styled.div`
   width: ${(props) => (props.isMobile ? '' : '50%')};
-  margin-right: ${(props) => (props.isMobile ? '0' : '2%')};
+  margin: ${(props) => (props.isMobile ? '0 0 12px 0' : '0 2% 0 0')};
   border-radius: 16px;
   background: white;
-  padding: 0 18px 18px 18px;
+  padding: 12px;
 `;
 
 const RepoInput = styled.input`
