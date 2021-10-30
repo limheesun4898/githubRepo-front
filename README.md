@@ -48,3 +48,7 @@ email: heehee4898@gmail.com
 ```
 
 6. styled-components로 반응형 작업
+
+
+* * *
+감사합니다.

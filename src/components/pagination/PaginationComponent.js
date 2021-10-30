@@ -26,7 +26,7 @@ function PaginationComponent({
 }
 
 PaginationComponent.propTypes = {
-  pageArray: PropTypes.oneOfType([PropTypes.string, PropTypes.object]).isRequired,
+  pageArray: PropTypes.oneOfType([PropTypes.array, PropTypes.object]).isRequired,
   total: PropTypes.number.isRequired,
   currentPage: PropTypes.number.isRequired,
   handleChangePage: PropTypes.func.isRequired,
