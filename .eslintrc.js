@@ -23,5 +23,6 @@ module.exports = {
     'max-len': 0,
     'object-curly-newline': 0,
     'no-mixed-operators': 0,
+    'space-infix-ops': 0,
   },
 };

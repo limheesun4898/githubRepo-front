@@ -1,24 +1,25 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
+import Color from '../../style/ColorTheme';
 import { repoSearchRequest } from '../../reducer/gitApiAction';
-import RepoDataList from '../../components/search/RepoDataList';
+import BookmarkList from '../../components/common/BookmarkList';
 
 const RepoSearch = (props) => {
   const { bookmarks, setBookmarks, isMobile } = props;
 
+  const dispatch = useDispatch();
   const repoList = useSelector((state) => state.search.repoSearch.data);
-
   const [repoInput, setRepoInput] = useState('');
 
   const handleChange = (e) => {
     setRepoInput(e.target.value);
   };
 
-  const dispatch = useDispatch();
-
   const handleRepoSearch = () => {
     dispatch(repoSearchRequest(repoInput));
+
+    setRepoInput('');
   };
 
   const handleBookmarkAdd = (index) => {
@@ -34,6 +35,12 @@ const RepoSearch = (props) => {
     }
   };
 
+  const handleKeyPress = (e) => {
+    if (e.key === 'Enter') {
+      handleRepoSearch();
+    }
+  };
+
   return (
     <RepoSearchBox isMobile={isMobile}>
       <h3>repository 검색</h3>
@@ -42,12 +49,13 @@ const RepoSearch = (props) => {
         placeholder="repository 이름을 입력하세요."
         value={repoInput}
         onChange={handleChange}
+        onKeyPress={handleKeyPress}
       />
-      <button type="button" onClick={handleRepoSearch}>검색</button>
-
-      <RepoDataList
-        repoList={repoList}
-        handleBookmarkAdd={handleBookmarkAdd}
+      {/* <button type="button" onClick={handleRepoSearch}>검색</button> */}
+      <BookmarkList
+        dataList={repoList.items}
+        handleClick={handleBookmarkAdd}
+        btnName="등록"
       />
     </RepoSearchBox>
   );
@@ -64,9 +72,10 @@ const RepoSearchBox = styled.div`
 `;
 
 const RepoInput = styled.input`
-  width: 280px;
-  height: 28px;
-  font-size: 18px;
-  border-radius: 8px;
-  border: 1px solid #BBBBBB;
+  width: calc(100% - 32px);
+  height: 32px;
+  border: 1px solid ${Color.grayBorder};
+  border-radius: 32px;
+  padding: 0 16px;
+  margin-bottom: 16px;
 `;

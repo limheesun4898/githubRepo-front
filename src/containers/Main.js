@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import Color from '../style/ColorTheme';
 import useLocalStorage from '../hooks/useLocalStorage';
 import useViewport from '../hooks/useViewport';
 import RepoSearch from './search/RepoSearch';
@@ -17,7 +18,7 @@ const Main = () => {
         <RepoBookmark bookmarks={bookmarks} setBookmarks={setBookmarks} isMobile={isMobile} />
       </Container>
       <Container type="issue" isMobile={isMobile}>
-        <IssueCollect bookmarks={bookmarks} />
+        <IssueCollect bookmarks={bookmarks} isMobile={isMobile} />
       </Container>
     </MainContainer>
   );
@@ -33,7 +34,7 @@ const MainContainer = styled.div`
 `;
 
 const Container = styled.div`
-  background: #F4F4F7;
+  background: ${Color.grayMainBg};
   border-radius: 16px;
   padding: ${(props) => (props.isMobile ? '12px' : '36px')};
   display: ${(props) => (props.type === 'issue' || props.type === 'top' && props.isMobile ? 'block' : 'flex')};

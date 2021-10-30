@@ -6,7 +6,7 @@ import PaginationContainer from '../pagination/PaginationContainer';
 import { issueListRequest } from '../../reducer/gitApiAction';
 
 const IssueCollect = (props) => {
-  const { bookmarks } = props;
+  const { bookmarks, isMobile } = props;
 
   if (bookmarks && bookmarks.length === 0) {
     return (
@@ -53,7 +53,8 @@ const IssueCollect = (props) => {
 
   return (
     <IssueContainer>
-      <BookmarkTabBox>
+      <h3>이슈 모음</h3>
+      <BookmarkTabBox isMobile={isMobile}>
         {bookmarks
           && bookmarks.map((res) => (
             <Tab active={tab === res} onClick={() => handleTabClick(res)}>
@@ -79,7 +80,7 @@ const IssueCollect = (props) => {
 export default IssueCollect;
 
 const BookmarkTabBox = styled.div`
-  display: flex;
+  display: ${(props) => (props.isMobile ? 'block' : 'flex')};
   justify-content: center;
   margin: 0 auto;
 `;

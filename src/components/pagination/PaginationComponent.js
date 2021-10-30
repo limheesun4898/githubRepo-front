@@ -1,6 +1,7 @@
 import React from 'react';
-import styled from 'styled-components';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
+import Color from '../../style/ColorTheme';
 
 function PaginationComponent({
   pageArray, currentPage, total, handleChangePage,
@@ -44,19 +45,21 @@ const PageNumberBtn = styled.button`
   width: ${(props) => (props.currentActive ? '30px' : '')};
   height: ${(props) => (props.currentActive ? '30px' : '')};
   color: ${(props) => (props.currentActive ? 'white' : 'black')};
-  background: ${(props) => (props.currentActive ? '#00a8ad' : 'none')};
+  background: ${(props) => (props.currentActive ? Color.greenActive : 'none')};
   border-radius: ${(props) => (props.currentActive ? '50%' : '')};
+  cursor: pointer;
 `;
 
 const ArrowBtn = styled.button`
   width: 30px;
   height: 30px;
   border-radius: 50%;    
-  border: 1px solid ${(props) => (props.isDisabled ? '#6a6a6a' : '#E6E6E6')};
+  border: 1px solid ${(props) => (props.isDisabled ? Color.grayDisabled : Color.grayBorder)};
   background: white;
+  cursor: pointer;
 `;
 
 const Arrow = styled.span`
-font-size:18px;
-pointer-events: none;
+  font-size:18px;
+  pointer-events: none;
 `;
