@@ -10,9 +10,9 @@ const IssueCollect = (props) => {
 
   if (bookmarks && bookmarks.length === 0) {
     return (
-      <div>
+      <IssueContainer>
         저장된 Repository가 없습니다.
-      </div>
+      </IssueContainer>
     );
   }
   const dispatch = useDispatch();

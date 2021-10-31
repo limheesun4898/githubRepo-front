@@ -8,7 +8,7 @@ import Bookmark from './bookmark/Bookmark';
 import IssueCollect from './issue/IssueCollect';
 
 const Main = () => {
-  const [bookmarks, setBookmarks] = useLocalStorage('bookmarks', '');
+  const [bookmarks, setBookmarks] = useLocalStorage('bookmarks', []);
   const { width, height, isMobile, isLoaded } = useViewport();
 
   return (

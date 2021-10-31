@@ -20,7 +20,7 @@ const RepoDataList = (props) => {
         && dataList.map((res) => (
           <DataLayout key={res.id}>
             <div>
-              {res.full_name.split('/')[0]}
+              {res.full_name ? res.full_name.split('/')[0] : ''}
               <span>님의 </span>
               {res.name}
             </div>
