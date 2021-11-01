@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import IssueDataList from '../../components/issue/IssueDataList';
@@ -21,9 +21,9 @@ const IssueCollect = (props) => {
   const [currentPage, setCurrentPage] = useState(1);
   const issueList = useSelector((state) => state.search.issueList.data);
 
-  const issueRequest = (bookmark, page) => {
+  const issueRequest = useCallback((bookmark, page) => {
     dispatch(issueListRequest(bookmark.full_name, page));
-  };
+  }, [bookmarks, tab, currentPage]);
 
   useEffect(() => {
     if (bookmarks.indexOf(tab) === -1) {
@@ -34,22 +34,22 @@ const IssueCollect = (props) => {
     }
   }, [bookmarks]);
 
-  const handleTabClick = (res) => {
+  const handleTabClick = useCallback((res) => (e) => {
     setTab(res);
     setCurrentPage(1);
 
     issueRequest(res, 1);
-  };
+  }, [tab]);
 
-  const handleChangePage = (page) => {
+  const handleChangePage = useCallback((page) => {
     setCurrentPage(Number(page));
 
     issueRequest(tab, Number(page));
-  };
+  }, [currentPage, tab]);
 
-  const handleIssueOpen = (issueNumber) => {
+  const handleIssueOpen = useCallback((issueNumber) => {
     window.open(`${process.env.REACT_APP_GITHUB}${tab.full_name}/issues/${issueNumber}`);
-  };
+  }, [issueList]);
 
   return (
     <IssueContainer>
@@ -60,7 +60,7 @@ const IssueCollect = (props) => {
             <Tab
               key={res.id}
               active={tab === res}
-              onClick={() => handleTabClick(res)}
+              onClick={handleTabClick(res)}
             >
               {res.name}
             </Tab>

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import Color from '../../style/ColorTheme';
@@ -14,9 +14,9 @@ const IssueDataList = (props) => {
     );
   }
 
-  const handleIssueOpen = (issueNumber) => {
+  const handleIssueOpen = useCallback((issueNumber) => (e) => {
     props.handleIssueOpen(issueNumber);
-  };
+  }, [issueList]);
 
   return (
     <IssueResultBox>
@@ -25,7 +25,7 @@ const IssueDataList = (props) => {
           <Issue
             key={res.id}
             type="button"
-            onClick={() => handleIssueOpen(res.number)}
+            onClick={handleIssueOpen(res.number)}
           >
             <Title>
               {res.title}
@@ -54,7 +54,7 @@ IssueDataList.defaultProps = {
   issueList: { items: [] },
 };
 
-export default IssueDataList;
+export default React.memo(IssueDataList);
 
 const IssueResultBox = styled.div`
   margin: 28px 0;

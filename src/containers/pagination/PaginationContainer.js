@@ -35,4 +35,4 @@ const PaginationContainer = (props) => {
   );
 };
 
-export default PaginationContainer;
+export default React.memo(PaginationContainer);

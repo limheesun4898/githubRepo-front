@@ -1,15 +1,15 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import styled from 'styled-components';
 import RepoDataList from '../../components/repository/RepoDataList';
 
 const Bookmark = (props) => {
   const { bookmarks, setBookmarks, isMobile } = props;
 
-  const handleBookmarkRemove = (res) => {
+  const handleBookmarkRemove = useCallback((res) => {
     const removeData = bookmarks.filter((e) => e.id !== res.id);
 
     setBookmarks(removeData);
-  };
+  }, [bookmarks]);
 
   return (
     <BookmarkBox isMobile={isMobile}>

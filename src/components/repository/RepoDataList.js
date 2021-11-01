@@ -1,18 +1,18 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import Color from '../../style/ColorTheme';
 
 const RepoDataList = (props) => {
-  const { dataList, btnName } = props;
+  const { bookmarks, dataList, btnName } = props;
 
   if (dataList.length === 0) {
     return null;
   }
 
-  const handleBtnClick = (res) => {
+  const handleBtnClick = useCallback((res) => (e) => {
     props.handleClick(res);
-  };
+  }, [dataList, bookmarks]);
 
   return (
     <ResultDataBox>
@@ -24,7 +24,7 @@ const RepoDataList = (props) => {
               <span>님의 </span>
               {res.name}
             </div>
-            <button type="button" onClick={() => handleBtnClick(res)}>{btnName}</button>
+            <button type="button" onClick={handleBtnClick(res)}>{btnName}</button>
           </DataLayout>
         ))}
     </ResultDataBox>
@@ -40,7 +40,7 @@ RepoDataList.defaultProps = {
   dataList: [],
 };
 
-export default RepoDataList;
+export default React.memo(RepoDataList);
 
 const ResultDataBox = styled.div`
   height: 200px;

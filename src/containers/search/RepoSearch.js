@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import Color from '../../style/ColorTheme';
@@ -12,17 +12,15 @@ const RepoSearch = (props) => {
   const repoList = useSelector((state) => state.search.repoSearch.data);
   const [repoInput, setRepoInput] = useState('');
 
-  const handleChange = (e) => {
+  const handleChange = useCallback((e) => {
     setRepoInput(e.target.value);
-  };
+  }, [repoInput]);
 
-  const handleRepoSearch = () => {
+  const handleRepoSearch = useCallback(() => {
     dispatch(repoSearchRequest(repoInput));
+  }, [repoInput]);
 
-    setRepoInput('');
-  };
-
-  const handleBookmarkAdd = (res) => {
+  const handleBookmarkAdd = useCallback((res) => {
     if (bookmarks.length > 3) {
       // 4개 이상 등록 체크
       alert('4개 이상 등록이 안됩니다.');
@@ -44,13 +42,13 @@ const RepoSearch = (props) => {
       const list = [...bookmarks, addData];
       setBookmarks(list);
     }
-  };
+  }, [bookmarks]);
 
-  const handleKeyPress = (e) => {
+  const handleKeyPress = useCallback((e) => {
     if (e.key === 'Enter') {
       handleRepoSearch();
     }
-  };
+  }, [repoInput]);
 
   return (
     <RepoSearchBox isMobile={isMobile}>
@@ -64,6 +62,7 @@ const RepoSearch = (props) => {
       />
       {/* <button type="button" onClick={handleRepoSearch}>검색</button> */}
       <RepoDataList
+        bookmarks={bookmarks}
         dataList={repoList.items}
         handleClick={handleBookmarkAdd}
         btnName="등록"
