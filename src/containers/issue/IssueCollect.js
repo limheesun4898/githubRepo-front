@@ -60,9 +60,13 @@ const IssueCollect = (props) => {
             <Tab
               key={res.id}
               active={tab === res}
-              onClick={handleTabClick(res)}
             >
-              {res.name}
+              <button
+                type="button"
+                onClick={handleTabClick(res)}
+              >
+                {res.name}
+              </button>
             </Tab>
           ))}
       </BookmarkTabBox>
@@ -85,18 +89,21 @@ export default IssueCollect;
 
 const BookmarkTabBox = styled.div`
   display: ${(props) => (props.isMobile ? 'block' : 'flex')};
-  // justify-content: center;
-  // margin: 0 auto;
 `;
 
 const Tab = styled.div`
-  cursor: pointer;
-  padding: 16px 0 5px 0;
-  margin: 0 8px;  
   background: white;
-  border-bottom: ${(props) => (props.active ? '2px solid green' : '')};
   color: black;
   opacity: ${(props) => (props.active ? '': '0.5')};
+  
+  button {
+    background: white;
+    padding: 16px 0 5px 0;
+    margin: 0 8px;
+    border: 0;
+    border-bottom: ${(props) => (props.active ? '2px solid green' : '')};
+    cursor: pointer;
+  }
 `;
 
 const IssueContainer = styled.div`

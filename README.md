@@ -1,4 +1,4 @@
-# 페이히어 프론트엔드 개발자 과제
+# 프론트엔드 개발자 과제
 
 email: heehee4898@gmail.com
 
@@ -9,6 +9,13 @@ email: heehee4898@gmail.com
 
 2. ```npm i```
 3. ```npm start```
+
+* * *
+
+### 개발 작업 환경
+1. node --version ```v12.22.7```
+2. npm --version ``` v6.14.1```
+3. eslint --version ```v7.6.0```
 
 * * *
 
@@ -23,13 +30,15 @@ email: heehee4898@gmail.com
 1. UI구조 정하기
 ![image](https://user-images.githubusercontent.com/38110785/139542159-878671b2-5976-432c-9cc4-11b95204fbb2.png)
 
-2. UI 구현
+2. 프로젝트 환경 세팅
 
-3. axios를 이용해 Git open API 호출하고 list로 출력
+3. UI 구현
+
+4. axios를 이용해 Git open API 호출하고 list로 출력
 
 5. 같은 구조의 dataList 컴포넌트화
 
-5. localstorage에 저장할 구조 설정
+6. localstorage에 저장할 구조 설정, 저장 삭제 기능 구현
 ```
 [
     {
@@ -47,7 +56,11 @@ email: heehee4898@gmail.com
 
 ```
 
-6. styled-components로 반응형 작업
+7. pagination 구현(요청은 10개씩 받고, 페이지네이션 페이지 버튼을 누를 때마다 API 호출)
+
+8. styled-components로 반응형 작업
+
+9. 렌더링 최적화 작업
 
 
 * * *
