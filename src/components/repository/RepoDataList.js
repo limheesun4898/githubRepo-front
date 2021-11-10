@@ -32,8 +32,12 @@ const RepoDataList = (props) => {
 };
 
 RepoDataList.propTypes = {
-  bookmarks: PropTypes.oneOfType([PropTypes.array, PropTypes.object]),
-  dataList: PropTypes.oneOfType([PropTypes.array, PropTypes.object]),
+  bookmarks: PropTypes.arrayOf({
+    id: PropTypes.number, // repo 고유 Id
+    name: PropTypes.string, // repoName
+    full_name: PropTypes.string, // {owner}/{repoName}
+  }),
+  dataList: PropTypes.arrayOf(PropTypes.array),
   btnName: PropTypes.string,
   handleClick: PropTypes.func.isRequired,
 };
@@ -41,7 +45,7 @@ RepoDataList.propTypes = {
 RepoDataList.defaultProps = {
   bookmarks: [],
   dataList: [],
-  btnName: '등록',
+  btnName: '',
 };
 
 export default React.memo(RepoDataList);

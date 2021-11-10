@@ -2,12 +2,13 @@ import React, { useState, useEffect, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
+import useViewport from '../../hooks/useViewport';
 import IssueDataList from '../../components/issue/IssueDataList';
 import PaginationContainer from '../pagination/PaginationContainer';
 import { issueListRequest } from '../../reducer/gitApiAction';
 
 const IssueCollect = (props) => {
-  const { bookmarks, isMobile } = props;
+  const { bookmarks } = props;
 
   if (bookmarks && bookmarks.length === 0) {
     return (
@@ -16,9 +17,10 @@ const IssueCollect = (props) => {
       </IssueContainer>
     );
   }
+
   const dispatch = useDispatch();
 
-  const [tab, setTab] = useState();
+  const [tab, setTab] = useState(bookmarks[0].name);
   const [currentPage, setCurrentPage] = useState(1);
   const issueList = useSelector((state) => state.search.issueList.data);
 
@@ -51,6 +53,8 @@ const IssueCollect = (props) => {
   const handleIssueOpen = useCallback((issueNumber) => {
     window.open(`${process.env.REACT_APP_GITHUB}${tab.full_name}/issues/${issueNumber}`);
   }, [issueList]);
+
+  const { isMobile } = useViewport();
 
   return (
     <IssueContainer>
@@ -87,13 +91,15 @@ const IssueCollect = (props) => {
 };
 
 IssueCollect.propTypes = {
-  bookmarks: PropTypes.oneOfType([PropTypes.array, PropTypes.object]),
-  isMobile: PropTypes.bool,
+  bookmarks: PropTypes.arrayOf({
+    id: PropTypes.number, // repo 고유 Id
+    name: PropTypes.string, // repoName
+    full_name: PropTypes.string, // {owner}/{repoName}
+  }),
 };
 
 IssueCollect.defaultProps = {
   bookmarks: [],
-  isMobile: false,
 };
 
 export default IssueCollect;

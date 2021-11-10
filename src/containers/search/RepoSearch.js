@@ -2,12 +2,13 @@ import React, { useCallback, useState } from 'react';
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
+import useViewport from '../../hooks/useViewport';
 import Color from '../../style/ColorTheme';
 import { repoSearchRequest } from '../../reducer/gitApiAction';
 import RepoDataList from '../../components/repository/RepoDataList';
 
 const RepoSearch = (props) => {
-  const { bookmarks, setBookmarks, isMobile } = props;
+  const { bookmarks, setBookmarks } = props;
 
   const dispatch = useDispatch();
   const repoList = useSelector((state) => state.search.repoSearch.data);
@@ -47,6 +48,8 @@ const RepoSearch = (props) => {
     }
   }, [bookmarks]);
 
+  const { isMobile } = useViewport();
+
   return (
     <RepoSearchBox isMobile={isMobile}>
       <h3>repository 검색</h3>
@@ -69,14 +72,16 @@ const RepoSearch = (props) => {
 };
 
 RepoSearch.propTypes = {
-  bookmarks: PropTypes.oneOfType([PropTypes.array, PropTypes.object]),
-  isMobile: PropTypes.bool,
+  bookmarks: PropTypes.arrayOf({
+    id: PropTypes.number, // repo 고유 Id
+    name: PropTypes.string, // repoName
+    full_name: PropTypes.string, // {owner}/{repoName}
+  }),
   setBookmarks: PropTypes.func.isRequired,
 };
 
 RepoSearch.defaultProps = {
   bookmarks: [],
-  isMobile: false,
 };
 
 export default RepoSearch;

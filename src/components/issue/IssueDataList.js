@@ -46,12 +46,16 @@ const IssueDataList = (props) => {
 };
 
 IssueDataList.propTypes = {
-  issueList: PropTypes.oneOfType([PropTypes.array, PropTypes.object]),
+  issueList: PropTypes.objectOf(PropTypes.object),
   handleIssueOpen: PropTypes.func,
 };
 
 IssueDataList.defaultProps = {
-  issueList: { items: [] },
+  issueList: {
+    items: [],
+    total_count: 0,
+    incomplete_results: false,
+  },
 };
 
 export default React.memo(IssueDataList);

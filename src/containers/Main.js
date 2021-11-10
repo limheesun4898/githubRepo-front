@@ -14,11 +14,11 @@ const Main = () => {
   return (
     <MainContainer width={width}>
       <Container type="top" isMobile={isMobile}>
-        <RepoSearch bookmarks={bookmarks} setBookmarks={setBookmarks} isMobile={isMobile} />
-        <Bookmark bookmarks={bookmarks} setBookmarks={setBookmarks} isMobile={isMobile} />
+        <RepoSearch bookmarks={bookmarks} setBookmarks={setBookmarks} />
+        <Bookmark bookmarks={bookmarks} setBookmarks={setBookmarks} />
       </Container>
       <Container type="issue" isMobile={isMobile}>
-        <IssueCollect bookmarks={bookmarks} isMobile={isMobile} />
+        <IssueCollect bookmarks={bookmarks} />
       </Container>
     </MainContainer>
   );

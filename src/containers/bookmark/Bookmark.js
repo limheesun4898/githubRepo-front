@@ -1,16 +1,19 @@
 import React, { useCallback } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import useViewport from '../../hooks/useViewport';
 import RepoDataList from '../../components/repository/RepoDataList';
 
 const Bookmark = (props) => {
-  const { bookmarks, setBookmarks, isMobile } = props;
+  const { bookmarks, setBookmarks } = props;
 
   const handleBookmarkRemove = useCallback((res) => {
     const removeData = bookmarks.filter((e) => e.id !== res.id);
 
     setBookmarks(removeData);
   }, [bookmarks]);
+
+  const { isMobile } = useViewport();
 
   return (
     <BookmarkBox isMobile={isMobile}>
@@ -25,14 +28,16 @@ const Bookmark = (props) => {
 };
 
 Bookmark.propTypes = {
-  bookmarks: PropTypes.oneOfType([PropTypes.array, PropTypes.object]),
-  isMobile: PropTypes.bool,
+  bookmarks: PropTypes.arrayOf({
+    id: PropTypes.number, // repo 고유 Id
+    name: PropTypes.string, // repoName
+    full_name: PropTypes.string, // {owner}/{repoName}
+  }),
   setBookmarks: PropTypes.func.isRequired,
 };
 
 Bookmark.defaultProps = {
   bookmarks: [],
-  isMobile: false,
 };
 
 export default Bookmark;
