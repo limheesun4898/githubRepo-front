@@ -6,7 +6,7 @@ import Color from '../../style/ColorTheme';
 const IssueDataList = (props) => {
   const { issueList } = props;
 
-  if (issueList && issueList.total_count === 0) {
+  if (issueList.length === 0) {
     return (
       <DataNone>
         이슈가 없습니다.
@@ -20,8 +20,8 @@ const IssueDataList = (props) => {
 
   return (
     <IssueResultBox>
-      {issueList.total_count > 0
-        && issueList.items.map((res) => (
+      {issueList
+        && issueList.map((res) => (
           <Issue
             key={res.id}
             type="button"
@@ -46,16 +46,12 @@ const IssueDataList = (props) => {
 };
 
 IssueDataList.propTypes = {
-  issueList: PropTypes.objectOf(PropTypes.object),
+  issueList: PropTypes.arrayOf(PropTypes.object),
   handleIssueOpen: PropTypes.func,
 };
 
 IssueDataList.defaultProps = {
-  issueList: {
-    items: [],
-    total_count: 0,
-    incomplete_results: false,
-  },
+  issueList: [],
 };
 
 export default React.memo(IssueDataList);

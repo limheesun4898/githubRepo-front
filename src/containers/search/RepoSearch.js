@@ -72,11 +72,13 @@ const RepoSearch = (props) => {
 };
 
 RepoSearch.propTypes = {
-  bookmarks: PropTypes.arrayOf({
-    id: PropTypes.number, // repo 고유 Id
-    name: PropTypes.string, // repoName
-    full_name: PropTypes.string, // {owner}/{repoName}
-  }),
+  bookmarks: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number, // repo 고유 Id
+      name: PropTypes.string, // repoName
+      full_name: PropTypes.string, // {owner}/{repoName}
+    }),
+  ),
   setBookmarks: PropTypes.func.isRequired,
 };
 

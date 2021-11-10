@@ -32,12 +32,14 @@ const RepoDataList = (props) => {
 };
 
 RepoDataList.propTypes = {
-  bookmarks: PropTypes.arrayOf({
-    id: PropTypes.number, // repo 고유 Id
-    name: PropTypes.string, // repoName
-    full_name: PropTypes.string, // {owner}/{repoName}
-  }),
-  dataList: PropTypes.arrayOf(PropTypes.array),
+  bookmarks: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number, // repo 고유 Id
+      name: PropTypes.string, // repoName
+      full_name: PropTypes.string, // {owner}/{repoName}
+    }),
+  ),
+  dataList: PropTypes.arrayOf(PropTypes.object),
   btnName: PropTypes.string,
   handleClick: PropTypes.func.isRequired,
 };
