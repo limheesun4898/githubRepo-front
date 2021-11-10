@@ -17,9 +17,11 @@ const RepoSearch = (props) => {
     setRepoInput(e.target.value);
   }, [repoInput]);
 
-  const handleRepoSearch = useCallback(() => {
+  const handleRepoSearch = (e) => {
+    e.preventDefault();
+
     dispatch(repoSearchRequest(repoInput));
-  }, [repoInput]);
+  };
 
   const handleBookmarkAdd = useCallback((res) => {
     if (bookmarks.length > 3) {
@@ -45,22 +47,17 @@ const RepoSearch = (props) => {
     }
   }, [bookmarks]);
 
-  // const handleKeyPress = useCallback((e) => {
-  //   if (e.key === 'Enter') {
-  //     handleRepoSearch();
-  //   }
-  // }, [repoInput]);
-
   return (
-    <RepoSearchBox isMobile={isMobile} onSubmit={handleRepoSearch}>
+    <RepoSearchBox isMobile={isMobile}>
       <h3>repository 검색</h3>
-      <RepoInput
-        name="repoInput"
-        placeholder="repository 이름을 입력하세요."
-        value={repoInput}
-        onChange={handleChange}
-        // onKeyPress={handleKeyPress}
-      />
+      <form onSubmit={handleRepoSearch}>
+        <RepoInput
+          name="repoInput"
+          placeholder="repository 이름을 입력하세요."
+          value={repoInput}
+          onChange={handleChange}
+        />
+      </form>
       <RepoDataList
         bookmarks={bookmarks}
         dataList={repoList.items}
@@ -84,7 +81,7 @@ RepoSearch.defaultProps = {
 
 export default RepoSearch;
 
-const RepoSearchBox = styled.form`
+const RepoSearchBox = styled.div`
   width: ${(props) => (props.isMobile ? '' : '50%')};
   margin: ${(props) => (props.isMobile ? '0 0 12px 0' : '0 2% 0 0')};
   border-radius: 16px;
