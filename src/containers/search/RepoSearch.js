@@ -1,4 +1,5 @@
 import React, { useCallback, useState } from 'react';
+import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import Color from '../../style/ColorTheme';
@@ -44,23 +45,22 @@ const RepoSearch = (props) => {
     }
   }, [bookmarks]);
 
-  const handleKeyPress = useCallback((e) => {
-    if (e.key === 'Enter') {
-      handleRepoSearch();
-    }
-  }, [repoInput]);
+  // const handleKeyPress = useCallback((e) => {
+  //   if (e.key === 'Enter') {
+  //     handleRepoSearch();
+  //   }
+  // }, [repoInput]);
 
   return (
-    <RepoSearchBox isMobile={isMobile}>
+    <RepoSearchBox isMobile={isMobile} onSubmit={handleRepoSearch}>
       <h3>repository 검색</h3>
       <RepoInput
         name="repoInput"
         placeholder="repository 이름을 입력하세요."
         value={repoInput}
         onChange={handleChange}
-        onKeyPress={handleKeyPress}
+        // onKeyPress={handleKeyPress}
       />
-      {/* <button type="button" onClick={handleRepoSearch}>검색</button> */}
       <RepoDataList
         bookmarks={bookmarks}
         dataList={repoList.items}
@@ -71,9 +71,20 @@ const RepoSearch = (props) => {
   );
 };
 
+RepoSearch.propTypes = {
+  bookmarks: PropTypes.oneOfType([PropTypes.array, PropTypes.object]),
+  isMobile: PropTypes.bool,
+  setBookmarks: PropTypes.func.isRequired,
+};
+
+RepoSearch.defaultProps = {
+  bookmarks: [],
+  isMobile: false,
+};
+
 export default RepoSearch;
 
-const RepoSearchBox = styled.div`
+const RepoSearchBox = styled.form`
   width: ${(props) => (props.isMobile ? '' : '50%')};
   margin: ${(props) => (props.isMobile ? '0 0 12px 0' : '0 2% 0 0')};
   border-radius: 16px;

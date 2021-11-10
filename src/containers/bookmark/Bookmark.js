@@ -1,4 +1,5 @@
 import React, { useCallback } from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import RepoDataList from '../../components/repository/RepoDataList';
 
@@ -21,6 +22,17 @@ const Bookmark = (props) => {
       />
     </BookmarkBox>
   );
+};
+
+Bookmark.propTypes = {
+  bookmarks: PropTypes.oneOfType([PropTypes.array, PropTypes.object]),
+  isMobile: PropTypes.bool,
+  setBookmarks: PropTypes.func.isRequired,
+};
+
+Bookmark.defaultProps = {
+  bookmarks: [],
+  isMobile: false,
 };
 
 export default Bookmark;

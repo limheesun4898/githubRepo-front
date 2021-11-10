@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
+import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import IssueDataList from '../../components/issue/IssueDataList';
@@ -83,6 +84,16 @@ const IssueCollect = (props) => {
       )}
     </IssueContainer>
   );
+};
+
+IssueCollect.propTypes = {
+  bookmarks: PropTypes.oneOfType([PropTypes.array, PropTypes.object]),
+  isMobile: PropTypes.bool,
+};
+
+IssueCollect.defaultProps = {
+  bookmarks: [],
+  isMobile: false,
 };
 
 export default IssueCollect;

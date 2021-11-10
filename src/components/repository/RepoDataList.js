@@ -32,12 +32,16 @@ const RepoDataList = (props) => {
 };
 
 RepoDataList.propTypes = {
+  bookmarks: PropTypes.oneOfType([PropTypes.array, PropTypes.object]),
   dataList: PropTypes.oneOfType([PropTypes.array, PropTypes.object]),
+  btnName: PropTypes.string,
   handleClick: PropTypes.func.isRequired,
 };
 
 RepoDataList.defaultProps = {
+  bookmarks: [],
   dataList: [],
+  btnName: '등록',
 };
 
 export default React.memo(RepoDataList);

@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import PaginationComponent from '../../components/pagination/PaginationComponent';
 
 const PaginationContainer = (props) => {
@@ -33,6 +34,20 @@ const PaginationContainer = (props) => {
   return (
     <div>null</div>
   );
+};
+
+PaginationContainer.propTypes = {
+  currentPage: PropTypes.number,
+  totalCount: PropTypes.number,
+  handleChangePage: PropTypes.func.isRequired,
+};
+
+PaginationContainer.defaultProps = {
+  currentPage: 0,
+  totalCount: 0,
+};
+
+PaginationContainer.defaultProps = {
 };
 
 export default React.memo(PaginationContainer);
