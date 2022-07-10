@@ -1,8 +1,5 @@
-# 프론트엔드 개발자 과제
 
 email: heehee4898@gmail.com
-
-요구사항은 모두 구현 완료하였습니다.
 
 ### 실행 방법
 1. `env` 파일에 `REACT_APP_GIT_ACCESS_TOKEN`에 이메일로 보낸 key 값을 넣어주세요.
@@ -64,4 +61,3 @@ email: heehee4898@gmail.com
 
 
 * * *
-감사합니다.
